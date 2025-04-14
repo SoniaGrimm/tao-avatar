@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TAO - Compagnon Virtuel</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: sans-serif;
+        }
+        .tao-container {
+            position: relative;
+            width: 300px;
+        }
+        img {
+            width: 100%;
+        }
+        .mouth {
+            position: absolute;
+            bottom: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #cc4c4c;
+            opacity: 0;
+            animation: talk 0.6s infinite;
+        }
+        @keyframes talk {
+            0%, 100% { opacity: 0; transform: translateX(-50%) scaleY(0.3); }
+            50% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+        }
+        .hidden { display: none; }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="tao-container">
+        <img src="https://cdn.jsdelivr.net/gh/Alya-GPT/assets@main/tao.png" alt="TAO le louveteau">
+        <div id="mouth" class="mouth hidden"></div>
+    </div>
+    <audio id="tao-audio" src="https://cdn.jsdelivr.net/gh/Alya-GPT/assets@main/tao_intro.mp3"></audio>
+    <button onclick="speak()">Fais parler TAO</button>
+
+    <script>
+        const audio = document.getElementById('tao-audio');
+        const mouth = document.getElementById('mouth');
+
+        function speak() {
+            mouth.classList.remove('hidden');
+            audio.play();
+            audio.onended = () => {
+                mouth.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
